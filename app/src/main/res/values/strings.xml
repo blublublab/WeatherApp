@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Прогноз погоды</string>
+    <string name="enter_city_text">Ввод Города</string>
+    <string name="find_weather_button_text">Получить погоду</string>
+    <string name="city_not_found">city not found</string>
+    <string name="weather_info_text">Информация о погоде</string>
+    <string name="enter_correct_city_text">Введите корректный город</string>
+    <string name="now_text">Сейчас : </string>
+    <string name="location_not_found_error">Location is not found</string>
+</resources>
