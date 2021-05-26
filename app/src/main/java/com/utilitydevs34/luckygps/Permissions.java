@@ -1,4 +1,4 @@
-package com.demo.weatherapp;
+package com.utilitydevs34.luckygps;
 
 import android.Manifest;
 import android.app.Activity;
@@ -7,6 +7,9 @@ import android.content.pm.PackageManager;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import io.michaelrocks.paranoid.Obfuscate;
+
+@Obfuscate
 public class Permissions {
     public static void Request_FINE_LOCATION(Activity act, int code)
     {

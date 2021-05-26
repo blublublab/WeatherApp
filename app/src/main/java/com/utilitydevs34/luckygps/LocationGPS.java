@@ -1,4 +1,4 @@
-package com.demo.weatherapp;
+package com.utilitydevs34.luckygps;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -15,6 +15,9 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import io.michaelrocks.paranoid.Obfuscate;
+
+@Obfuscate
 public class LocationGPS {
     private Location locationObj;
     private final double[] locationGPS = new double[2];

@@ -1,7 +1,10 @@
-package com.demo.weatherapp;
+package com.utilitydevs34.luckygps;
 
 import android.graphics.Bitmap;
 
+import io.michaelrocks.paranoid.Obfuscate;
+
+@Obfuscate
 public class Weather {
     private Bitmap icon;
     private boolean isItCorrect;

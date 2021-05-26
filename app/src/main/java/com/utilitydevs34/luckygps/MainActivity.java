@@ -1,4 +1,4 @@
-package com.demo.weatherapp;
+package com.utilitydevs34.luckygps;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -31,6 +31,9 @@ import java.net.URLEncoder;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
+import io.michaelrocks.paranoid.Obfuscate;
+
+@Obfuscate
 //http://api.openweathermap.org/data/2.5/weather?q=Kiev&lang=ru&units=metric&appid=849ae2dfafc5ee24445547ce32c25f0a
 public class MainActivity extends AppCompatActivity {
     public static WeakReference<MainActivity> weakActivity;
@@ -60,16 +63,18 @@ public class MainActivity extends AppCompatActivity {
         imageViewTypeOfWeather = findViewById(R.id.imageViewTypeOfWeather);
         buttonCheckWeather = findViewById(R.id.buttonCheckWeather);
         textViewLatLon = findViewById(R.id.textViewLatLon);
+
+
         locationGPS = new LocationGPS();
         Location location;
         location = locationGPS.updatePGS();
         //Handler
-        if(location != null){
-                locationGPSArray[0] = location.getLatitude();
-                locationGPSArray[1] = location.getLongitude();
-                getWeather(locationGPSArray);
+        if (location != null) {
+            locationGPSArray[0] = location.getLatitude();
+            locationGPSArray[1] = location.getLongitude();
+            getWeather(locationGPSArray);
         } else {
-              Log.i("location" ,"location is Null 71 MainActivity");
+            Log.i("location", "location is Null 71 MainActivity");
 
         }
     }

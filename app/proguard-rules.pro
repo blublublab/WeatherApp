@@ -1,21 +1,36 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+-optimizationpasses 30
+-dontskipnonpubliclibraryclasses
+-dontpreverify
+-verbose
+-mergeinterfacesaggressively
+-optimizations !code/simplification/arithmetic
+-dontusemixedcaseclassnames
+-allowaccessmodification
+-useuniqueclassmembernames
+-keeppackagenames doNotKeepAThing
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+-repackageclasses 'com'
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+-keep public class com.android.installreferrer.** { *; }
+-keep class com.appsflyer.** { *; }
+-dontwarn com.squareup.okhttp.**
+-dontwarn com.squareup.okhttp.internal.**
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+-keepattributes *Annotation*
+-keepattributes Signature
+
+-keepattributes JavascriptInterface
+-keepclassmembers class * {
+    @android.webkit.JavascriptInterface <methods>;
+}
+
+-keep class com.google.** { *; }
+-keep class org.apache.** { *; }
+-keep class com.android.** { *; }
+-keep class junit.** { *; }
+-keep class * implements android.os.Parcelable {*;}
+-keepclassmembers class * implements android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+-keep public class com.android.installreferrer.** { *; }
