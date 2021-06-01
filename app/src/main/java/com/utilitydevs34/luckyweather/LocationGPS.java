@@ -1,4 +1,4 @@
-package com.utilitydevs34.luckygps;
+package com.utilitydevs34.luckyweather;
 
 import android.Manifest;
 import android.content.pm.PackageManager;

@@ -1,11 +1,11 @@
-package com.utilitydevs34.luckygps.foo;
+package com.utilitydevs34.luckyweather.foo;
 
 import android.content.Context;
 
 import com.google.android.gms.ads.identifier.AdvertisingIdClient;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.utilitydevs34.luckygps.AppSingletonClass;
+import com.utilitydevs34.luckyweather.AppSingletonClass;
 
 import java.io.IOException;
 import java.util.UUID;

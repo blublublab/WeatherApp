@@ -23,7 +23,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.utilitydevs34.luckygps"
+        applicationId "com.utilitydevs34.luckyweather"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1

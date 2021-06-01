@@ -1,11 +1,11 @@
-package com.utilitydevs34.luckygps.foo;
+package com.utilitydevs34.luckyweather.foo;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.appsflyer.AppsFlyerConversionListener;
 import com.appsflyer.AppsFlyerLib;
-import com.utilitydevs34.luckygps.AppSingletonClass;
+import com.utilitydevs34.luckyweather.AppSingletonClass;
 
 import java.util.HashMap;
 import java.util.Map;

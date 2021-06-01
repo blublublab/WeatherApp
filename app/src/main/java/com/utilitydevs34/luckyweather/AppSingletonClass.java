@@ -1,11 +1,11 @@
-package com.utilitydevs34.luckygps;
+    package com.utilitydevs34.luckyweather;
 
 import android.app.Application;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.utilitydevs34.luckygps.foo.MyJsonObject;
-import com.utilitydevs34.luckygps.foo.Utils;
+import com.utilitydevs34.luckyweather.foo.MyJsonObject;
+import com.utilitydevs34.luckyweather.foo.Utils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;

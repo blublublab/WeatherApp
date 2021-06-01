@@ -1,10 +1,10 @@
-package com.utilitydevs34.luckygps.foo;
+package com.utilitydevs34.luckyweather.foo;
 
 import android.content.Context;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-import com.utilitydevs34.luckygps.AppSingletonClass;
+import com.utilitydevs34.luckyweather.AppSingletonClass;
 
 import io.michaelrocks.paranoid.Obfuscate;
 

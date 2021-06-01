@@ -1,5 +1,6 @@
-package com.utilitydevs34.luckygps;
+package com.utilitydevs34.luckyweather;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
@@ -28,13 +29,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Objects;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 import io.michaelrocks.paranoid.Obfuscate;
 
 @Obfuscate
-//http://api.openweathermap.org/data/2.5/weather?q=Kiev&lang=ru&units=metric&appid=849ae2dfafc5ee24445547ce32c25f0a
+//http://api.openweathermap.org/data/2.5/weather?q=Kiev&lang=ru&units=metric&appid=849ae2dfafc
+////http://api.openweathermap.org/data/2.5/weather?q=Kiev&lang=ru&units=metric&appid=849ae2dfafc5ee24445547ce32c25f0a
 public class MainActivity extends AppCompatActivity {
     public static WeakReference<MainActivity> weakActivity;
     private TextView textViewLatLon;
@@ -56,8 +58,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         weakActivity = new WeakReference<>(MainActivity.this);
-
-        Objects.requireNonNull(getSupportActionBar()).hide();
         editTextNameOfCity = findViewById(R.id.editTextNameOfCity);
         textViewWeather = findViewById(R.id.textViewWeather);
         imageViewTypeOfWeather = findViewById(R.id.imageViewTypeOfWeather);
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
             editTextNameOfCity.setVisibility(View.INVISIBLE);
             buttonCheckWeather.setVisibility(View.INVISIBLE);
             String location = "lat=" + locationGPSArray[0] + "&lon=" + locationGPSArray[1];
-            url = "https://api.openweathermap.org/data/2.5/weather?" + location + "&lang=ru&units=metric&appid=849ae2dfafc5ee24445547ce32c25f0a";
+            url = "https://api.openweathermap.org/data/2.5/weather?" + location + "&lang=en&units=metric&appid=849ae2dfafc5ee24445547ce32c25f0a";
             Log.i("location", url);
         } else {
 
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-            url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&lang=ru&units=metric&appid=849ae2dfafc5ee24445547ce32c25f0a";
+            url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&lang=en&units=metric&appid=849ae2dfafc5ee24445547ce32c25f0a";
         }
         GetWeatherTask getWeatherTask = new GetWeatherTask();
         try {
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             if (weather.getIsItCorrect()) {
                 // ТУТ КОД ЕСЛИ ВСЁ ПРАВИЛЬНО
                 imageViewTypeOfWeather.setImageBitmap(weather.getIcon());
-                textViewWeather.setText(String.format("На улице сейчас: %s \nТемпература : %s \nЧувствуется как: %s \nСкорость ветра: %s м/c ", weather.getTypeOfWeather(), (int) weather.getTemp(), (int) weather.getFeelsLikeTemp(), weather.getWindSpeed()));
+                textViewWeather.setText(String.format( Locale.getDefault() , "%s%s%s%d%s%d%s%s%s",  getString(R.string.weather_now_text), weather.getTypeOfWeather(), getString(R.string.tempnowtext), (int) weather.getTemp(), getString(R.string.feelingliketext), (int) weather.getFeelsLikeTemp(), getString(R.string.speedwindtext), weather.getWindSpeed(), getString(R.string.mstext)));
             } else {
                 textViewWeather.setText(getString(R.string.city_not_found));
             }
@@ -118,6 +118,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickGetWeather(View view) {
         getWeather(locationGPSArray);
+    }
+
+    public void onClickPrivacyPolicy(View view) {
+        Intent intentPriv = new Intent(this, GPSTopActivity.class);
+        intentPriv.putExtra("privpo", "privpol");
+        startActivity(intentPriv);
     }
 
     public static class GetWeatherTask extends AsyncTask<String, Void, Weather> {
@@ -157,8 +163,7 @@ public class MainActivity extends AppCompatActivity {
                     weather.setTypeOfWeather(jsonWeather.getJSONObject(0).getString("description"));
                     weather.setTemp((Double) jsonAllInfo.getJSONObject("main").get("temp"));
                     weather.setFeelsLikeTemp((Double) jsonAllInfo.getJSONObject("main").get("feels_like"));
-                    String s = jsonAllInfo.getJSONObject("wind").getString("speed");
-                    weather.setWindSpeed((double) Integer.parseInt(s));
+                    weather.setWindSpeed(jsonAllInfo.getJSONObject("wind").getDouble("speed"));
                 }
 
             } catch (MalformedURLException e) {

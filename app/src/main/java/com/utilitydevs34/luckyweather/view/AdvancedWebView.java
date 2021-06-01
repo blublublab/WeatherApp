@@ -1,4 +1,4 @@
-package com.utilitydevs34.luckygps.view;
+package com.utilitydevs34.luckyweather.view;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

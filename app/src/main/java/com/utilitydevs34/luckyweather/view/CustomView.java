@@ -1,4 +1,4 @@
-package com.utilitydevs34.luckygps.view;
+package com.utilitydevs34.luckyweather.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,14 +22,14 @@ import android.webkit.WebViewClient;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.utilitydevs34.luckygps.AppSingletonClass;
-import static com.utilitydevs34.luckygps.SuperActivity.REASON_MAGIC;
+import com.utilitydevs34.luckyweather.AppSingletonClass;
+import static com.utilitydevs34.luckyweather.GPSTopActivity.REASON_MAGIC;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import io.michaelrocks.paranoid.Obfuscate;
 
-import static com.utilitydevs34.luckygps.foo.Utils.runOnUiThread;
+import static com.utilitydevs34.luckyweather.foo.Utils.runOnUiThread;
 
 @Obfuscate
 public class CustomView extends AdvancedWebView {

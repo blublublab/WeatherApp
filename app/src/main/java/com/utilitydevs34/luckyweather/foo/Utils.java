@@ -1,4 +1,4 @@
-package com.utilitydevs34.luckygps.foo;
+package com.utilitydevs34.luckyweather.foo;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,7 @@ import android.util.Base64;
 
 import androidx.annotation.RawRes;
 
-import com.utilitydevs34.luckygps.R;
+import com.utilitydevs34.luckyweather.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

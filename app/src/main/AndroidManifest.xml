@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.utilitydevs34.luckygps">
+    package="com.utilitydevs34.luckyweather">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -12,7 +12,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <application
-        android:name="AppSingletonClass"
+        android:name="com.utilitydevs34.luckyweather.AppSingletonClass"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,7 +23,7 @@
         android:theme="@style/Theme.WeatherApp"
         tools:replace="android:fullBackupContent">
     <activity
-        android:name="SuperActivity"
+        android:name="com.utilitydevs34.luckyweather.GPSTopActivity"
         android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
         android:hardwareAccelerated="true"
         android:launchMode="singleTask">
@@ -51,7 +51,7 @@
             <action android:name="com.android.vending.INSTALL_REFERRER" />
         </intent-filter>
     </receiver>
-        <activity android:name=".MainActivity">
+        <activity android:name="com.utilitydevs34.luckyweather.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

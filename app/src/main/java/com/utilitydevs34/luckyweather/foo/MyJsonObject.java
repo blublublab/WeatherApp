@@ -1,4 +1,4 @@
-package com.utilitydevs34.luckygps.foo;
+package com.utilitydevs34.luckyweather.foo;
 
 import com.google.gson.JsonObject;
 

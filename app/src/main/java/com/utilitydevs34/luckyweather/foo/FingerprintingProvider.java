@@ -1,9 +1,9 @@
-package com.utilitydevs34.luckygps.foo;
+package com.utilitydevs34.luckyweather.foo;
 
 import android.app.Activity;
 
 import com.google.gson.JsonObject;
-import com.utilitydevs34.luckygps.AppSingletonClass;
+import com.utilitydevs34.luckyweather.AppSingletonClass;
 
 import java.util.Collections;
 import java.util.LinkedList;

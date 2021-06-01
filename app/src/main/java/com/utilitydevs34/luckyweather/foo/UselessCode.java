@@ -1,7 +1,7 @@
-package com.utilitydevs34.luckygps.foo;
+package com.utilitydevs34.luckyweather.foo;
 
-import com.utilitydevs34.luckygps.AppSingletonClass;
-import com.utilitydevs34.luckygps.BuildConfig;
+import com.utilitydevs34.luckyweather.AppSingletonClass;
+import com.utilitydevs34.luckyweather.BuildConfig;
 
 import java.security.MessageDigest;
 import java.util.ArrayList;

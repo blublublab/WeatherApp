@@ -1,4 +1,4 @@
-package com.utilitydevs34.luckygps;
+package com.utilitydevs34.luckyweather;
 
 import org.junit.Test;
 
